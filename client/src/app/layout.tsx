@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import DashboardWrapper from "./dashboardWrapper";
+import DashboardWrapper from "./(components)/dashboard/dashboardWrapper";
+
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <DashboardWrapper>
-         {children}
+          {children}
         </DashboardWrapper>
-         
+          {children} 
       </body>
     </html>
   );
