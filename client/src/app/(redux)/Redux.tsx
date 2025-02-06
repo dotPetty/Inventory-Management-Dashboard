@@ -78,12 +78,13 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 /* PROVIDER */
+//non-assertion operator (!, 'null!') tells typescript that your current value wont be null, even though it's initialized as such.
 export default function StoreProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const storeRef = useRef<AppStore>();
+  const storeRef = useRef<AppStore>(null!);
   if (!storeRef.current) {
     storeRef.current = makeStore();
     setupListeners(storeRef.current.dispatch);

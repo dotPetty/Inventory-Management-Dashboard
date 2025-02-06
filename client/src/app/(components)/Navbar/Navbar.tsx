@@ -1,17 +1,28 @@
 'use client';
 
 import { Bell, Menu, Settings, Sun } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/app/(redux)/Redux';
+import { setIsSidebarCollapsed } from '@/state';
 import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
+ // Addidng state as we need
+  const dispath = useAppDispatch();
+  const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
+  
+  // Toggle Sidebar, invert Sidebar Collapse anytime this function is triggered.
+  const toggleSidebar = () => {
+    dispath(setIsSidebarCollapsed(!isSidebarCollapsed));
+  };
+
   return (
     <div className='flex justify-between items-center w-full mb-7'>
         {/* Left side */}
         <div className='flex justify-between items-center gap-5'>
             <button 
                 className='px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100'
-                onClick={() => {}}
+                onClick={toggleSidebar}
             >
                 <Menu 
                     className='w-4 h-4' 
@@ -49,7 +60,7 @@ const Navbar = () => {
                 </div>
                 
                 {/* add bell notification number function to increase or decrease */}
-                <div className='relative'>
+                <div className='relative inline-block'>
                     <Bell 
                         className='cursor-pointer text-gray-500'
                         size={24}
