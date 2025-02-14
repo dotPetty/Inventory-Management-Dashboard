@@ -34,7 +34,6 @@ export default function RootLayout({
         <DashboardWrapper>
           {children}
         </DashboardWrapper>
-          {children} 
       </body>
     </html>
   );
