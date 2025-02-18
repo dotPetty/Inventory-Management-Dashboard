@@ -3,6 +3,7 @@ import React from 'react';
 import PopularProductsCard from './PopularProductsCard';
 import PurchaseSummaryCard from './PurchaseSummaryCard';
 import SalesSummaryCard from './SalesSummaryCard';
+import ExpenseSummaryCard from './ExpenseSummaryCard';
 
 const Dashboard = () => {
   return (
@@ -10,6 +11,7 @@ const Dashboard = () => {
       <PopularProductsCard />
       <SalesSummaryCard />
       <PurchaseSummaryCard />
+      <ExpenseSummaryCard />
     </div>
   )
 }
