@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect } from 'react';
-import Navbar from '../Navbar/Navbar';
-import Sidebar from '../Sidebar/Sidebar';
-import StoreProvider, { useAppSelector } from '../../(redux)/Redux';
+import Navbar from '../(components)/Navbar/Navbar';
+import Sidebar from '../(components)/Sidebar/Sidebar';
+import StoreProvider, { useAppSelector } from '../(redux)/Redux';
 
 
 // classname={`light`} : light mode.
