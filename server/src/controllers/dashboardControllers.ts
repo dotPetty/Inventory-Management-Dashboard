@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
+// This is how we get data form 5 different data sources for our different SQL tsbles.
+
 // Register Prisma models
 const prisma = new PrismaClient();
 
@@ -10,7 +12,7 @@ export const getDashboardMetrics = async (
     res: Response
 ): Promise<void> => {
     try {
-       // Grab values form database.
+       // Grab values form database (prisma.producs, see schema).
        // 'desc' = descending.
         const popularProducts = await prisma.products.findMany({
             take: 15,
@@ -50,6 +52,7 @@ export const getDashboardMetrics = async (
           );
 
           // In this instence we transform the data on the backend ourself.
+          // Function: Grabbing items and mapping them to a new object but with the amount being converted to a string.
           const expenseByCategorySummary = expenseByCategorySummaryRaw.map(
             (item) => ({
               ...item,

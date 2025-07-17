@@ -16,8 +16,8 @@ const client_1 = require("@prisma/client");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const prisma = new client_1.PrismaClient();
-// seed data, delete data, and upload the data that we have to our sql database.
-// delete data function (first deletes any pre-existing data in database incase you update your seed data in any way).
+// Seed data, delete data beforehand, and upload the data that we have to our sql database.
+// Delete data function (first deletes any pre-existing data in database incase you update your seed data in any way).
 function deleteAllData(orderedFileNames) {
     return __awaiter(this, void 0, void 0, function* () {
         const modelNames = orderedFileNames.map((fileName) => {
@@ -36,11 +36,11 @@ function deleteAllData(orderedFileNames) {
         }
     });
 }
-// function to geab seed data from the seedData directory.
+// Function to grab seed data from the seedData directory (mock data).
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const dataDirectory = path_1.default.join(__dirname, "seedData");
-        // figure out the file names (order matters for foreign id connection: ids are created in sequential order).
+        // Figure out the file names (order matters for foreign id connection: ids are created in sequential order).
         const orderedFileNames = [
             "products.json",
             "expenseSummary.json",
@@ -52,20 +52,20 @@ function main() {
             "expenses.json",
             "expenseByCategory.json",
         ];
-        // delete data (logic above).
+        // Delete any data that might exist in our databases (logic above). WHen you first start you wont have any data but when you create data and you want to seed it again, this will delete all the data created beforehand.
         yield deleteAllData(orderedFileNames);
-        // grab each file, get the correct name with error handling, and create model schemas.
+        // Grab each file, get the correct name with error handling, and create model schemas.
         for (const fileName of orderedFileNames) {
             const filePath = path_1.default.join(dataDirectory, fileName);
             const jsonData = JSON.parse(fs_1.default.readFileSync(filePath, "utf-8"));
             const modelName = path_1.default.basename(fileName, path_1.default.extname(fileName));
             const model = prisma[modelName];
-            // error handling.
+            // Error handling.
             if (!model) {
                 console.error(`No Prisma model matches the file name: ${fileName}`);
                 continue;
             }
-            // create model schemas and pass data into each.
+            // Create model schemas and pass data into each (Prisma).
             for (const data of jsonData) {
                 yield model.create({
                     data,

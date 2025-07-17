@@ -7,6 +7,7 @@ export interface InitialStateTypes {
     isDarkMode: boolean;
 }
 
+// Represents state to determine if Sidebar is closed or if darkmode is selected.
 const initialState: InitialStateTypes = {
     isSidebarCollapsed: false,
     isDarkMode: false,
@@ -15,6 +16,8 @@ const initialState: InitialStateTypes = {
 // Create slice to store data (slice is part of the data store).
 // 'action: PayloadAction<boolean>' represents the type which allows you to determine and pass a value for isSidebarCollapsed 'state.isSidebarCollapsed = action.payload'.
 // any time we use a particular function ie.'setIsSidebarCollapsed', it will update the Redux store state (finction to change the global store state).
+
+// Slice: Parts of the data store.
 
 export const globalSlice = createSlice({
     name: 'global',

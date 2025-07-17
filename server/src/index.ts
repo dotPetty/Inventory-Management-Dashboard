@@ -29,7 +29,7 @@ app.get("/products", productRoutes); // http://localhost:8000/products
 app.get("/users", userRoutes); // http://localhost:8000/users
 app.get("/expenses", expenseRoutes); // http://localhost:8000/expenses
 
-/* SERVER */
+/* SERVER: We usr our port env if it's available, if not we default to port 3001 */
 const port = Number(process.env.PORT) || 3001;
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);

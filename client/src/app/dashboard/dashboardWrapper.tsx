@@ -4,15 +4,20 @@ import Navbar from '../(components)/Navbar/Navbar';
 import Sidebar from '../(components)/Sidebar/Sidebar';
 import StoreProvider, { useAppSelector } from '../(redux)/Redux';
 
+// Cannot use 'use client' in our layout.tsx file. This DashboardWrapper file must have 'use client' in order to provide the store (StoreProvider) to the DashboardLayout. 
+
+// The reason why this file is not configured as a single component is because the DashboardLayout is going to require some redux state. The StoreProvider has to be wrapped around the '{children}' element.
+
+// '../(components)/Navbar/Navbar': components is places in parens so that next.js doesn't register it as a separate url or domain. The page.tsx file inside of the dashboard directory ensures the page registeres to the route.
 
 // classname={`light`} : light mode.
 // classname={`dark`} : dark mode.
 
 // Connect Redux Store to Next.js application.
-// This is broken down into two component the layout is going to require some Redux state, and the 'StoreProvider' wrapper would not be able to provide it to the layout, You have to wrap it around the child.
+// This is broken down into two component, the layout is going to require some Redux state, and the 'StoreProvider' wrapper would not be able to provide it to the layout, You have to wrap it around the child.
 
 export const DashboardLayout = ({ children } : { children: React.ReactNode }) => {
-  // Grap the state wheather Sidebar is collapsed.
+  // Grab the state wheather Sidebar is collapsed.
   const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
   // Grap the state wheather DarkMode.
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
@@ -27,10 +32,11 @@ export const DashboardLayout = ({ children } : { children: React.ReactNode }) =>
       document.documentElement.classList.add('light');
     }
   })
-
+ 
   return (
     <div className={`${isDarkMode ? 'dark' : 'light'} flex bg-gray-50 text-gray-900 w-full min-h-screen`}>
         <Sidebar />
+        {/* anything in this main tag will render on the rightside of the Sidebar */}
       <main className={`flex flex-col w-full h-full py-7 px-9 bg-gray-50 ${isSidebarCollapsed ? 'md:pl-24' : 'md:pl-72'}`}>
         <Navbar />
         {children}

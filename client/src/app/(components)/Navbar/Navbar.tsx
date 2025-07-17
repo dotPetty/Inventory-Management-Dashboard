@@ -64,7 +64,7 @@ const Navbar = () => {
                     </button>
                 </div>
                 
-                {/* add bell notification number function to increase or decrease */}
+                {/* add bell notification number function to increase or decrease as well as notification functionality */}
                 <div className='relative inline-block'>
                     <Bell 
                         className='cursor-pointer text-gray-500'

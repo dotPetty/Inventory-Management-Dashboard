@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// Boilerplate so we can make API calls. Making API calls with next.js and redux toolkit.
+
+// interface: Create the type that represents what we get back form the backend.
+
 export interface Product {
     productId: string;
     name: string;
@@ -63,7 +67,11 @@ export const api = createApi({
     reducerPath: 'api',
     tagTypes: ["DashboardMetrics","Products", "Users", "Expenses"],
     endpoints: (build) => ({
+      // DashboardMetrics is the value and type that we're getting from the backend and 'void' is what we're supposed to send to the query but in this case it's a GET request so its always going to be void.
         getDashboardMetrics: build.query<DashboardMetrics, void>({
+          // Respresents the route that we want.
+          // providersTags: When you're getting a request and grabbing the dashboard API  (res.json in dashboardController file), it get saved to the tag, in this case DashboardMetrics.
+          // You specify the tag because later on we can invalidate if we want this to refresh (refetch) or update tag.  
            query: () => "/dashboard",
            providesTags: ["DashboardMetrics"]
         }),

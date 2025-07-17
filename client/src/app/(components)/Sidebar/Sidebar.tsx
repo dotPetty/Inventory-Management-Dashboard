@@ -8,14 +8,16 @@ import React from 'react';
 
 // Creating Sidebar Links.
 // 'pathname': grap the path of the URL that we're at.
-// 'isActive': determine if the link URL is active so we can know what page we are on and determine what to highlight
+// 'isActive': determine if the link URL is active so we can know what page we are on and determine what to highlight.
 interface SidebarLinkProps {
     href: string;
     icon: LucideIcon;
     label: string;
     isCollapsed: boolean;
 }
+// pathname: This will grab the path of the URL that we are at. If we are at a separate path we can grab it using usePathname().
 
+// isActive: Helps determine which page we are on so it can be highlighted. This current configuration highlights the Dashboard page (Home page) by default for its the first page users will see when logged into the browser.
 const SidebarLink = ({
     href,
     icon: Icon,
@@ -39,7 +41,7 @@ const SidebarLink = ({
 }
 
 const Sidebar = () => {
-  // Addidng state as we need
+  // Addidng state as we need.
   const dispath = useAppDispatch();
   const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
   
@@ -48,7 +50,7 @@ const Sidebar = () => {
     dispath(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
 
-  // Classes to apply different setting
+  // Classes to apply different setting.
   const sidebarClassNames = `fixed flex flex-col ${
     isSidebarCollapsed ? 'w-0 md:w-16' : 'w-72 md:w-64'
   } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`
@@ -75,7 +77,7 @@ const Sidebar = () => {
             </button>
         </div>
 
-        {/* Links */}
+        {/* Links: Component above. */}
         <div className='flex-grow mt-8'>
             <SidebarLink 
                 href='/dashboard'

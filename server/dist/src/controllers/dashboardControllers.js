@@ -11,12 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDashboardMetrics = void 0;
 const client_1 = require("@prisma/client");
+// This is how we get data form 5 different data sources for our different SQL tsbles.
 // Register Prisma models
 const prisma = new client_1.PrismaClient();
 // Backend logic
 const getDashboardMetrics = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Grab values form database.
+        // Grab values form database (prisma.producs, see schema).
         // 'desc' = descending.
         const popularProducts = yield prisma.products.findMany({
             take: 15,
@@ -49,6 +50,7 @@ const getDashboardMetrics = (req, res) => __awaiter(void 0, void 0, void 0, func
             },
         });
         // In this instence we transform the data on the backend ourself.
+        // Function: Grabbing items and mapping them to a new object but with the amount being converted to a string.
         const expenseByCategorySummary = expenseByCategorySummaryRaw.map((item) => (Object.assign(Object.assign({}, item), { amount: item.amount.toString() })));
         res.json({
             popularProducts,

@@ -24,7 +24,9 @@ import {
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
-// Use local storage to persist data on different user sessions.
+// This code configuration can be used for any next.js application, provided by Redux documentation.
+
+// Use local storage to persist data on different user sessions: If user comes back to web page, that store will be saved accross different user sessions when they log into the browser. Example: site remains darkmode when user logs back into the browser. (redux persist)
 
 /* REDUX PERSISTENCE: setup local storage state */
 const createNoopStorage = () => {
@@ -45,12 +47,14 @@ const storage =
   typeof window === "undefined"
     ? createNoopStorage()
     : createWebStorage("local");
-
+// Persisting data in local storage.
 const persistConfig = {
   key: "root",
   storage,
   whitelist: ["global"],
 };
+// globalReducer: Used for all of the state.
+// api.reducer: Anytime we are making an API call, we can use this using redux toolkit query to save it into our reducer
 const rootReducer = combineReducers({
   global: globalReducer,
   [api.reducerPath]: api.reducer,
